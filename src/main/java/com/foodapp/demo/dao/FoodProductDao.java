@@ -24,4 +24,8 @@ public class FoodProductDao {
 	public List<FoodProduct > getProducts(){
 		return foodProductRepository.findAll();
 	}
+	
+	public void deleteByProductId(int id) {
+		foodProductRepository.deleteById(id);
+	}
 }
