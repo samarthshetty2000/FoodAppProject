@@ -21,7 +21,15 @@ public class FoodProduct {
 	
 	@ManyToOne
 	@JoinColumn
-	Menu menu;
+	private Menu menu;
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
 
 	public int getId() {
 		return id;

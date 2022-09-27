@@ -2,12 +2,15 @@ package com.foodapp.demo.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -21,14 +24,41 @@ public class User {
 	private String password;
 	private String role;
 	
-	@OneToOne
-	Menu menu;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
+
+	private Menu menu;
 	
 	@OneToMany(mappedBy="user")
-	List<Branch> branch;
+	
+	private List<Branch> branch;
 	
 	@OneToMany(mappedBy="user")
-	List<FoodOrder> foodOrders;
+	private List<FoodOrder> foodOrders;
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+	public List<Branch> getBranch() {
+		return branch;
+	}
+
+	public void setBranch(List<Branch> branch) {
+		this.branch = branch;
+	}
+
+	public List<FoodOrder> getFoodOrders() {
+		return foodOrders;
+	}
+
+	public void setFoodOrders(List<FoodOrder> foodOrders) {
+		this.foodOrders = foodOrders;
+	}
 
 	public User(int id, String name, String email, String password, String role) {
 

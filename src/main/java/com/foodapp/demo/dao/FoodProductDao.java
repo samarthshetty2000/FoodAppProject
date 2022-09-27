@@ -16,9 +16,9 @@ public class FoodProductDao {
 	@Autowired
 	FoodProductRepository  foodProductRepository;
 	
-	public void add(FoodProduct foodProduct) {
+	public FoodProduct add(FoodProduct foodProduct) {
 	
-		foodProductRepository.save(foodProduct);
+		return foodProductRepository.save(foodProduct);
 	}
 	
 	public List<FoodProduct > getProducts(){

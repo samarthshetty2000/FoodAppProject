@@ -5,13 +5,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodapp.demo.entity.FoodOrder;
 import com.foodapp.demo.entity.FoodProduct;
 import com.foodapp.demo.entity.User;
+import com.foodapp.demo.responseStructure.ResponseStructure;
+import com.foodapp.demo.services.FoodOrderService;
 import com.foodapp.demo.services.FoodProductService;
 import com.foodapp.demo.services.UserService;
 
@@ -19,11 +23,13 @@ import com.foodapp.demo.services.UserService;
 public class DemoController {
 	
 	
-	@Autowired
-	UserService userService;
+	
 	
 	@Autowired
 	FoodProductService foodProductService;
+	
+	
+
 	
 	
 	@GetMapping("/")
@@ -33,23 +39,11 @@ public class DemoController {
 	}
 	
 	
-	@PostMapping("/adduser")
-	public ResponseEntity addUser(@RequestBody User user) {
-		
-		 User tempUser=userService.addUser(user);
-		return new ResponseEntity<>( tempUser,HttpStatus.ACCEPTED);
-	}
-	
-	@GetMapping("/getusers")
-	public ResponseEntity getUsers() {
 
-		return new ResponseEntity<>(userService.getUsers(),HttpStatus.ACCEPTED);
-	}
-	
-	@PostMapping("/addproduct")
-	public ResponseEntity addFoodProduct(@RequestBody FoodProduct foodProduct) {
+	@PostMapping("/addproduct/{id}")
+	public ResponseEntity addFoodProduct(@RequestBody FoodProduct foodProduct,@PathVariable int id) {
 		
-		foodProductService.add(foodProduct);
+		foodProductService.add(foodProduct,id);
 		return new ResponseEntity<>(foodProduct,HttpStatus.ACCEPTED);
 	}
 	
@@ -58,6 +52,10 @@ public class DemoController {
 
 		return new ResponseEntity<>(foodProductService.getProducts(),HttpStatus.ACCEPTED);
 	}
+	
+	
+	
+	
 	
 	
 	

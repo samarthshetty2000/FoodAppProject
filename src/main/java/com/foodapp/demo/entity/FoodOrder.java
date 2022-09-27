@@ -1,13 +1,18 @@
 package com.foodapp.demo.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class FoodOrder {
@@ -25,7 +30,25 @@ public class FoodOrder {
 
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnore
 	User user;
+	
+	
+	
+//	@OneToMany(mappedBy="foodOrder",cascade=CascadeType.ALL)
+//	List<Item> itemList;
+//
+//	public List<Item> getItemList() {
+//		return itemList;
+//	}
+//
+//	public void setItemList(List<Item> itemList) {
+//		this.itemList = itemList;
+//	}
+//	
+	
+	
+	
 
 	public FoodOrder(int id, int totalPrice, Date orderCreatedTime, Date orderDeliveryTime, String customerName,
 			long contactNumber, User user) {
@@ -96,6 +119,15 @@ public class FoodOrder {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "FoodOrder [id=" + id + ", totalPrice=" + totalPrice + ", orderCreatedTime=" + orderCreatedTime
+				+ ", orderDeliveryTime=" + orderDeliveryTime + ", customerName=" + customerName + ", contactNumber="
+				+ contactNumber + ", user=" + user + "]";
 	}
 
 }
