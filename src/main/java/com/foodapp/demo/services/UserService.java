@@ -15,8 +15,8 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 	
-	public void addUser(User user) {
-		userDao.addUser(user);
+	public User addUser(User user) {
+		return userDao.addUser(user);
 	}
 	
 	public List<User> getUsers(){

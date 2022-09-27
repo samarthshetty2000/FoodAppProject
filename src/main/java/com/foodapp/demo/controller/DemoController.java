@@ -36,8 +36,8 @@ public class DemoController {
 	@PostMapping("/adduser")
 	public ResponseEntity addUser(@RequestBody User user) {
 		
-		 userService.addUser(user);
-		return new ResponseEntity<>(user,HttpStatus.ACCEPTED);
+		 User tempUser=userService.addUser(user);
+		return new ResponseEntity<>( tempUser,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/getusers")
